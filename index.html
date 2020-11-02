@@ -5,11 +5,45 @@
     <meta name="viewport" content="width=device-width">
     <title>Astronauts</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
+    <script>
+    window.addEventListener("load", function(){
+      let json = [];
+      
+      fetch("https://handlers.education.launchcode.org/static/astronauts.json").then(function(response){
+        response.json().then(function(json){
+          const output = document.getElementById('container');
+          for(let i = 0; i < json.length; i++){  
+            let body = `
+                    <div class = "bio">
+            <img class = 'avatar' src = ${json[i].picture}>
+          <h3>${json[i].firstName} ${json[i].lastName}</h3>
+          
+          <ul>
+            <li>Hours in space: ${json[i].hoursInSpace}</li>
+            
+            <li>Active: ${json[i].active}</li>
+            <li>Skills: ${json[i].skills}</li>
+          </ul>
+         
+        </div>
+        
+                    `        
+                    output.innerHTML = output.innerHTML + body;
+                        ;
+          }
+        });
+      });
+    });
+  </script>
   </head>
   <body>
-    <script src="script.js"></script>
-    <h1>Astronauts</h1>
+    <script 
+    src="script.js">
+    
+  </script>
+    <h1 id = 'astronauts'>Astronauts</h1>
     <div id="container">
+        
         <!-- List of astronauts will be added here dynamically -->
     </div>
   </body>
